@@ -1,4 +1,0 @@
-export const PUZZLEINPUT =
-`
-*COPY PUZZLE INPUT HERE*
-`;

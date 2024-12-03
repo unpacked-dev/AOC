@@ -1,8 +1,10 @@
 console.time();
-import {PUZZLEINPUT} from "./input.js";
 
+import { import_puzzle_input } from "../helper_functions.js";
+const PUZZLE_INPUT = import_puzzle_input();
 let result;
-//CODE HERE
+
+
 
 console.log(result);
 console.timeEnd();
