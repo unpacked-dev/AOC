@@ -15,37 +15,44 @@ const transform_to_grid = (PUZZLE_INPUT) => {
     return grid;
 }
 
-const scan_grid = () => {
+const scan_grid = (search_term) => {
     for(let i = 0; i < GRID.length; i++) {
         for(let j = 0; j < GRID[i].length; j++) {
             const char = GRID[i][j];
-            if(char !== "X") continue; //"XMAS" has to start with "X"
+            if(char !== search_term[0]) continue; //Begin search on first letter only
 
-            //Check right
-            if(GRID[i]?.[j+1] === "M" && GRID[i]?.[j+2] === "A" && GRID[i]?.[j+3] === "S") result++;
-            //Check left
-            if(GRID[i]?.[j-1] === "M" && GRID[i]?.[j-2] === "A" && GRID[i]?.[j-3] === "S") result++;
+            //Check directions
+            for(let direction of Object.keys(directions)) {
+                let is_valid = true;
 
-            //Check Up
-            if(GRID[i+1]?.[j] === "M" && GRID[i+2]?.[j] === "A" && GRID[i+3]?.[j] === "S") result++;
-            //Check Down
-            if(GRID[i-1]?.[j] === "M" && GRID[i-2]?.[j] === "A" && GRID[i-3]?.[j] === "S") result++;
-
-            //Check Up Right
-            if(GRID[i+1]?.[j+1] === "M" && GRID[i+2]?.[j+2] === "A" && GRID[i+3]?.[j+3] === "S") result++;
-            //Check Up Left
-            if(GRID[i+1]?.[j-1] === "M" && GRID[i+2]?.[j-2] === "A" && GRID[i+3]?.[j-3] === "S") result++;
-            //Check Down Right
-            if(GRID[i-1]?.[j+1] === "M" && GRID[i-2]?.[j+2] === "A" && GRID[i-3]?.[j+3] === "S") result++;
-            //Check Down Left
-            if(GRID[i-1]?.[j-1] === "M" && GRID[i-2]?.[j-2] === "A" && GRID[i-3]?.[j-3] === "S") result++;
+                //Loop over search term to find patterns
+                for(let k = 1; k < search_term.length; k++) {
+                    if(GRID[i+(k*directions[direction].x)]?.[j+(k*directions[direction].y)] !== search_term[k]) {
+                        is_valid = false;
+                    }
+                }
+                if(is_valid) {
+                    result++;
+                }
+            }
         }
     }
 }
 
+const directions = {
+    right: { x: 0, y: 1 },
+    left: { x: 0, y: -1 },
+    up: { x: 1, y: 0 },
+    down: { x: -1, y: 0 },
+    up_right: { x: 1, y: 1 },
+    up_left: { x: 1, y: -1 },
+    down_right: { x: -1, y: 1 },
+    down_left: { x: -1, y: -1 },
+}
+
 //Run Program
 const GRID = transform_to_grid(PUZZLE_INPUT);
-scan_grid();
+scan_grid("XMAS");
 
 console.log(result);
 console.timeEnd();
