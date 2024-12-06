@@ -23,4 +23,4 @@ for(let i = 0; i < puzzle.length; i++) {
 
 console.log(result);
 
-//deno run --allow-all .\app.js
+//deno run --allow-all .\parser.js

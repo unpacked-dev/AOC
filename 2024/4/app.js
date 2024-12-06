@@ -1,20 +1,10 @@
 console.time();
 
-import { import_puzzle_input } from "../../helper_functions.js";
+import { import_puzzle_input, transform_to_grid } from "../../helper_functions.js";
 const PUZZLE_INPUT = import_puzzle_input();
 let result = 0;
 
 //Define helper functions
-const transform_to_grid = (PUZZLE_INPUT) => {
-    const grid = [];
-    const rows = PUZZLE_INPUT.split("\n");
-    for(let row of rows) {
-        const cols = row.toString().replaceAll("\r", "").split("");
-        grid.push(cols);
-    }
-    return grid;
-}
-
 const scan_grid = (search_term) => {
     for(let i = 0; i < GRID.length; i++) {
         for(let j = 0; j < GRID[i].length; j++) {
