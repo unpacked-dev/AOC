@@ -29,7 +29,7 @@ function simulate_guard() {
             y: GUARD.y + directions[GUARD.direction].y
         }
         const new_location_grid_item = GRID[new_location.y]?.[new_location.x];
-        console.log(GUARD, new_location, new_location_grid_item, result);
+        //console.log(GUARD, new_location, new_location_grid_item, result);
 
         if(new_location_grid_item === ".") {
             GUARD.x = new_location.x;
